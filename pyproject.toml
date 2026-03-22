@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dspy-prompt-optimizer"
+version = "0.1.0"
+description = "Automatisk DSPy-baseret prompt-optimering til lokale og cloud LLMs"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Jørgen Strange Olsen" }
+]
+keywords = ["dspy", "prompt-optimization", "llm", "ollama", "rag", "nlp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = []  # DSPy er optional — se extras
+
+[project.optional-dependencies]
+dspy = ["dspy-ai>=2.5"]
+yaml = ["pyyaml>=6.0"]
+dev = [
+    "dspy-ai>=2.5",
+    "pyyaml>=6.0",
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/jorgenstrangeolsen/dspy-prompt-optimizer"
+Issues = "https://github.com/jorgenstrangeolsen/dspy-prompt-optimizer/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dspy_optimizer*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "integration: kræver Ollama og DSPy installeret",
+]
+
+[tool.coverage.run]
+source = ["dspy_optimizer"]
+omit = ["tests/*", "examples/*"]
